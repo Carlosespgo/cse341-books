@@ -48,4 +48,12 @@ const authorHasBooks = async (id) => {
   return count > 0;
 };
 
-export { getAllAuthors, getAuthorById, createAuthor, updateAuthor, deleteAuthor, authorHasBooks };
+const authorExists = async (id) => {
+  const db = getDb();
+  const collection = db.collection('authors');
+  const author = await collection.findOne({ id });
+
+  return !!author;
+};
+
+export { getAllAuthors, getAuthorById, createAuthor, updateAuthor, deleteAuthor, authorHasBooks, authorExists };
